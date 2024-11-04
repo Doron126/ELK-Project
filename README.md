@@ -25,7 +25,19 @@ This Project using ELK components to collect, process and visualize system data.
    "sudo systemctl start logstash"
    "sudo systemctl enable logstash"
    
-4. Configure logrotate on syslog and a cronjob for the logrotae so the logstash requests logged on syslog won't fill the disk.
+4. Configure logrotate on syslog and a hourly cronjob for the logrotae so the logstash requests logged on syslog won't fill the disk.
+   this is for example my logrotate:
+   "su root adm
+    /var/log/syslog {
+        size 15G
+        hourly
+        rotate 5
+        compress
+        delaycompress
+        missingok
+        notifempty
+        copytruncate
+    }"
    
 5. Install Kibana:
    "wget https://artifacts.elastic.co/downloads/kibana/kibana-8.15.3-amd64.deb"
